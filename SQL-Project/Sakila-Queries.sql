@@ -1,4 +1,4 @@
-# 1. All "films" with PG-13 films with "rental rate" of 2.99 or lower.
+/* 1. All "films" with PG-13 films with "rental rate" of 2.99 or lower.*/
 	
 select 
     f.rating, 
@@ -7,7 +7,7 @@ from film f
 where f.rating = 'PG-13' AND f.rental_rate <= 2.99;
 
 
-# 2) All films that have deleted scenes(with starting of any letter and apply anylimit).
+/* 2) All films that have deleted scenes(with starting of any letter and apply anylimit).*/
  
 select 
     f.title,
@@ -18,7 +18,7 @@ from film f
 where f.special_features LIKE '%deleted scenes%' and f.title like 'c%'
 limit 10;
 
-# 3) All active customers.
+/* 3) All active customers.*/
 	
 select 
     c.customer_id,
@@ -28,7 +28,7 @@ from customer c
 where c.active = 1;
 
 
-# 4) Names of customers who rented a movie on 26th July 2005.
+/* 4) Names of customers who rented a movie on 26th July 2005.*/
 
 select 
     r.customer_id,
@@ -39,7 +39,7 @@ join customer c on c.customer_id = r.customer_id
 where date(r.rental_date) = '2005-07-26';
 
 
-#5) Distinct names of customers who rented a movie on 26th July 2005.
+/* 5) Distinct names of customers who rented a movie on 26th July 2005.*/
 
 select 
     distinct c.first_name,
@@ -50,7 +50,8 @@ from rental r
 join customer c on c.customer_id = r.customer_id
 where date(r.rental_date) = '2005-07-26';
 
-# ------------------------------OR----------------------------------------------------------
+/* ------------------------------OR----------------------------------------------------------*/
+
 select 
     c.first_name,
     COUNT(*) AS rental_count
@@ -60,7 +61,7 @@ where date(r.rental_date) = '2005-07-26'
 group by c.first_name;
 
 
-#6) How many rentals we do on each day?
+/*6) How many rentals we do on each day?*/
 
 select 
     date(r.rental_date) as RD,
@@ -71,7 +72,7 @@ order by Rental_prday_count desc;
 
 
 
-#7) All Sci-fi films in our catalogue
+/* 7) All Sci-fi films in our catalogue.*/
 
 select 
     cat.category_id,	
@@ -85,7 +86,7 @@ join film f on f.film_id = fc.film_id
 where cat.name = 'Sci-Fi';
 
 
-#8) A Customers and how many movies they rented from us on daily bases so far?
+/* 8) A Customers and how many movies they rented from us on daily bases so far?*/
 
 SELECT 
     c.first_name,
@@ -96,7 +97,7 @@ JOIN customer c ON c.customer_id = r.customer_id
 GROUP BY c.first_name , c.customer_id
 ORDER BY Rental_prday_count DESC;
 
-#9) Which movies should we discontinue from our catalogue (less than 2 lifetime rentals)?
+/* 9) Which movies should we discontinue from our catalogue (less than 2 lifetime rentals)?*/
 
 with low_rentals as 
 	(select  
@@ -114,7 +115,7 @@ from low_rentals
 join inventory i on i.inventory_id = low_rentals.inventory_id
 join film f on f.film_id = i.film_id;
     
-#10) Which movies are not returned yet
+/*10) Which movies are not returned yet*/
 
 select 
     r.customer_id, 
@@ -128,7 +129,7 @@ join film f on f.film_id = i.film_id
 where r.return_date  is null
 order by f.title;
 
-#11) How much money and rentals we make for store 1 by day?
+/*11) How much money and rentals we make for store 1 by day?*/
 
 with day_rentals as
 	(select 
@@ -151,7 +152,7 @@ with day_rentals as
 
 
 
-#12) What are the top 3 earnings so far?
+/*12) What are the top 3 earnings so far?*/
 
 select 
     sum(p.amount)'Total Payment',
