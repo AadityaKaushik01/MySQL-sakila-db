@@ -12,3 +12,14 @@ This query retrieves all films that are rated "PG-13" and have a rental rate of 
 2. Films with "Deleted Scenes" Special Feature (Limit to Titles Starting with 'C')
 Description:
 This query returns films that have "deleted scenes" as one of their special features, with titles starting with the letter "C". The results are limited to 10 rows.
+
+3. Active Customers
+Description:
+This query lists all active customers in the system (those with an active status of 1.
+
+
+4. Names of Customers Who Rented a Movie on 26th July 2005
+Description:
+This query identifies customers who rented a movie on July 26, 2005, along with their rental dates.
+
+
